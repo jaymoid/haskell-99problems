@@ -1,4 +1,6 @@
-module Q1to10Lists where
+module Q01to10Lists where
+
+-- https://wiki.haskell.org/99_questions/1_to_10
 
 --1
 myLast :: [a] -> a

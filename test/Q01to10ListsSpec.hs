@@ -1,12 +1,14 @@
-module Q1to10ListsSpec where
+module Q01to10ListsSpec where
 
 import Test.Hspec
-import Q1to10Lists
+import Q01to10Lists
 
 -- `main` is here so that this module can be run from GHCi on its own.  It is
 -- not needed for automatic spec discovery.
 main :: IO ()
 main = hspec spec
+
+-- https://wiki.haskell.org/99_questions/1_to_10
 
 spec :: Spec
 spec = do
