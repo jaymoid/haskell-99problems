@@ -67,6 +67,7 @@ spec = do
            \sublists. If a list contains repeated elements they should be \
            \placed in separate sublists." $ do
     it "packs consecutives into sublists" $ do
+      pack "112233" `shouldBe` ["11","22","33"]
       pack ['a', 'a', 'a', 'a', 'b', 'c', 'c', 'a', 'a', 'd', 'e', 'e', 'e', 'e'] `shouldBe`  ["aaaa","b","cc","aa","d","eeee"]
 
   describe "Problem 10: Run-length encoding of a list. Use the result \

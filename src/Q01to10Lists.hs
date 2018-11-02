@@ -34,13 +34,13 @@ flatten :: NestedList a -> [a]
 flatten = undefined
 
 --8
-compress :: [a] -> [a]
+compress :: Eq a => [a] -> [a]
 compress = undefined
 
 --9
-pack :: [a] -> [[a]]
+pack :: Eq a => [a] -> [[a]]
 pack = undefined
 
 --10
-encode :: (Integral a) => [b] -> [(a, b)]
+encode :: Eq a => [a] -> [(Int, a)]
 encode = undefined
