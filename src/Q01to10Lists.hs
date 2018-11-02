@@ -23,7 +23,7 @@ myReverse :: [a] -> [a]
 myReverse = undefined
 
 --6
-isPalindrome :: [a] -> Bool
+isPalindrome :: (Eq a) => [a] -> Bool
 isPalindrome = undefined
 
 -- 7
