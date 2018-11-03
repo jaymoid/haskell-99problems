@@ -4,7 +4,8 @@ A Stack project with automated tests for the [Haskell 99 problems](https://wiki.
 
 ## Running the tests
 1. Clone the repo
-2. `stack test`
+2. `stack test`  
+Alternatively, if you want the tests to run when you save your source file use: `stack build --file-watch --test`
 
 ## I need help...
 Please feel free to contribute to the tests. I've made a start.
