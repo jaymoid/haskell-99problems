@@ -33,6 +33,8 @@ spec = do
     it "returns the length of a list" $ do
       myLength [123, 456, 789] `shouldBe` 3
       myLength "Hello, world!" `shouldBe` 13
+    it "empty list returns 0" $ do
+      myLength [] `shouldBe` 0
 
   describe "Problem 5: Reverse a list." $ do
     it "reverses the list" $ do
@@ -54,6 +56,7 @@ spec = do
       flatten (Elem 5)  `shouldBe` [5]
       flatten (List [Elem 1, List [Elem 2, List [Elem 3, Elem 4], Elem 5]])
         `shouldBe` [1,2,3,4,5]
+    it "empty nested lists returns a empty list" $ do
       flatten (List [] :: NestedList Int ) `shouldBe` ([])
 
   describe "Problem 8 :Eliminate consecutive duplicates of list elements.\n\
@@ -62,6 +65,8 @@ spec = do
            \should not be changed." $ do
     it "should remove consecutive elements" $ do
       compress "aaaabccaadeeee" `shouldBe` "abcade"
+    it "should not change lists without consecutive elements" $ do
+      compress "abcade" `shouldBe` "abcade"
 
   describe "Problem 9: Pack consecutive duplicates of list elements into \
            \sublists. If a list contains repeated elements they should be \
@@ -69,6 +74,8 @@ spec = do
     it "packs consecutives into sublists" $ do
       pack "112233" `shouldBe` ["11","22","33"]
       pack ['a', 'a', 'a', 'a', 'b', 'c', 'c', 'a', 'a', 'd', 'e', 'e', 'e', 'e'] `shouldBe`  ["aaaa","b","cc","aa","d","eeee"]
+    it "lists with no consecutives are in singleton lists" $ do
+      pack "123" `shouldBe` ["1","2","3"]
 
   describe "Problem 10: Run-length encoding of a list. Use the result \
            \of problem P09 to implement the so-called run-length \

@@ -29,7 +29,7 @@ spec = do
   describe "Problem 14: Duplicate the elements of a list." $ do
     it "repeats each element in the list, once" $ do
       dupli [1, 2, 3] `shouldBe` [1,1,2,2,3,3]
-      dupli "hello world" `shouldBe` "hheelloo  wwoorrlldd"
+      dupli "hello world" `shouldBe` "hheelllloo  wwoorrlldd"
 
   describe "Problem 15: Replicate the elements of a list a given number \
             \times." $ do
