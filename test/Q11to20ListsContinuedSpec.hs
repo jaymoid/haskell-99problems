@@ -54,6 +54,7 @@ spec = do
            \Hint: Use the predefined functions length and (++)." $ do
     it "Rotates a list elements by a specified amount" $ do
       rotate ['a','b','c','d','e','f','g','h'] 3 `shouldBe` "defghabc"
+    it "Rotates a list elements by a specified negative amount" $ do
       rotate ['a','b','c','d','e','f','g','h'] (-2) `shouldBe` "ghabcdef"
 
   describe "Problem 20: Remove the K'th element from a list." $ do
