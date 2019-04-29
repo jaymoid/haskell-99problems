@@ -1,6 +1,7 @@
 module Q21to28ListsAgainSpec where
 
 import Test.Hspec
+import Data.List (sort)
 import Q21to28ListsAgain
 
 -- `main` is here so that this module can be run from GHCi on its own.  It is
@@ -20,3 +21,39 @@ spec = do
   describe "Problem 22" $ do
     it "creates a list containing all integers within a given range." $ do
       range 4 9 `shouldBe` [4,5,6,7,8,9]
+
+  describe "Problem 23" $ do
+    it "extract a given number of randomly selected elements from a list." $ do
+      let input = "abcdefgh"
+          randomElements = rndSelect input 3
+      randomElements `shouldSatisfy` all (flip elem input)
+
+  describe "Problem 24" $ do
+    it "draw N different random numbers from the set 1..M. " $ do
+      diffSelect 6 49 `shouldSatisfy` (\xs -> all (flip elem [1..49]) xs && length xs == 6)
+
+  describe "Problem 25" $ do
+    it "generate a random permutation of the elements of a list." $ do
+      let originalList = "badcef"
+      rndPermu originalList `shouldSatisfy` (\xs ->
+          length originalList == length xs
+          &&
+          sort originalList == sort xs
+          &&
+          (originalList /= xs)
+        )
+
+--   describe "Problem 26" $ do
+--     it "generates the combinations of K distinct objects chosen from the N elements of a list" $ do
+--
+-- In how many ways can a committee of 3 be chosen from a group of 12 people? We all know that there are C(12,3) = 220 possibilities (C(N,K) denotes the well-known binomial coefficients). For pure mathematicians, this result may be great. But we want to really generate all the possibilities in a list.
+--
+-- Example:
+--
+-- * (combinations 3 '(a b c d e f))
+-- ((A B C) (A B D) (A B E) ... )
+--
+-- Example in Haskell:
+--
+-- λ> combinations 3 "abcdef"
+-- ["abc","abd","abe",...]
