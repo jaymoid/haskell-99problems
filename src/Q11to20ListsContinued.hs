@@ -11,22 +11,21 @@ data ListItem a = Single a
 -- 11
 encodeModified :: (Eq a) => [a] -> [ListItem a]
 encodeModified = map (uncurry toListItem) . encode
-  where toListItem n e = case n of
-          1         -> Single e
-          otherwise -> Multiple n e
+  where toListItem n e = case n of 1 -> Single e
+                                   _ -> Multiple n e
 
 
 -- 12
 decodeModified :: [ListItem a] -> [a]
 decodeModified = concatMap fromListItem
   where fromListItem (Single i)     = [i]
-        fromListItem (Multiple n i) = take n $ repeat i
+        fromListItem (Multiple n i) = replicate n i
 
 
 -- 13
 encodeDirect :: Eq a => [a] -> [ListItem a]
 encodeDirect []       = []
-encodeDirect xs@(x:_) = firstGroup ++ (encodeDirect restOfList)
+encodeDirect xs@(x:_) = firstGroup ++ encodeDirect restOfList
   where
     firstGroup = (: []) $ toListItem $ takeWhile (== x) xs
     restOfList = dropWhile (== x) xs
@@ -85,13 +84,12 @@ rotate :: (Integral b) => [a] -> b -> [a]
 rotate xs n = drop offset xs ++ take offset xs
   where
     offset = calcOffset $ fromIntegral n
-    calcOffset x = if (x<0) then (length xs) - (abs x) else x
+    calcOffset x = if x<0 then length xs - abs x else x
 
 
 -- 20
 removeAt :: (Integral a) => a -> [b] -> (b, [b])
 removeAt n xs = (xs!!(fromIntegral n - 1), listCreate 1 xs)
   where listCreate _     []     = []
-        listCreate count (x:xs) = if (count == n)
-                                    then   listCreate (count+1) xs
-                                    else x:listCreate (count+1) xs
+        listCreate count (x:xs) = if count == n then   listCreate (count+1) xs
+                                                else x:listCreate (count+1) xs

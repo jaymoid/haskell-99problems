@@ -7,7 +7,7 @@ module Q01to10Lists where
 myLast :: [a] -> a
 myLast (x:xs) = case xs of
   [] -> x
-  otherwise -> myLast1 xs
+  _ -> myLast1 xs
 
 myLast1 :: [a] -> a
 myLast1 = foldr1 (const id)
@@ -20,12 +20,12 @@ myLast2 = foldl (flip const) undefined
 myButLast :: [a] -> a
 myButLast (x1:x2:xs) = case xs of
   [] -> x1
-  otherwise -> myButLast xs
+  _  -> myButLast xs
 
 myButLast1 :: [a] -> a
 myButLast1 xs = case parse xs of
     Nothing -> error "Not enough values in list"
-    Just x -> x
+    Just x  -> x
   where parse = fst . foldl (\b a -> (snd b, Just a)) (Nothing, Nothing)
 
 myButLast2 :: [a] -> a
@@ -68,7 +68,7 @@ myReverse1 (x:xs) =  myReverse xs ++ x : []
 
 --6
 isPalindrome :: (Eq a) => [a] -> Bool
-isPalindrome a = a == (myReverse a)
+isPalindrome a = a == myReverse a
 
 
 -- 7
@@ -81,7 +81,7 @@ data NestedList a =
 flatten :: NestedList a -> [a]
 flatten (Elem x) = [x]
 flatten (List []) = []
-flatten (List (x:xs)) = flatten x ++ (flatten $ List xs)
+flatten (List (x:xs)) = flatten x ++ flatten (List xs)
 
 flatten1 :: NestedList a -> [a]
 flatten1 (Elem x) = [x]
@@ -97,7 +97,7 @@ compress :: Eq a => [a] -> [a]
 compress [] = []
 compress [x] = [x]
 compress (x:xs) =
-  let grouped = if (x /= head xs) then x:[] else []
+  let grouped = if x /= head xs then [x] else []
   in grouped ++ compress xs
 
 compress1 :: Eq a => [a] -> [a]
@@ -111,7 +111,7 @@ pack xs = go [] xs
     go [] [] = []
     go [] (x:xs) = go (x:[]) xs
     go ys [] = [ys]
-    go ys (x:xs) = if (x `elem` ys) then go (x:ys) xs else [ys] ++ (go [x] xs)
+    go ys (x:xs) = if x `elem` ys then go (x:ys) xs else ys : (go [x] xs)
 
 pack1 :: Eq a => [a] -> [[a]]
 pack1 [] = []

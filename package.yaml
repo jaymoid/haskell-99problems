@@ -21,6 +21,9 @@ description:         Please see the README on GitHub at <https://github.com/gith
 
 dependencies:
 - base >= 4.7 && < 5
+- random
+- transformers
+- safe
 
 library:
   source-dirs: src
@@ -35,6 +38,7 @@ executables:
     - -with-rtsopts=-N
     dependencies:
     - haskell-99problems
+
 
 tests:
   haskell-99problems-test:
