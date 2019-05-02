@@ -2,6 +2,7 @@ module Q21to28ListsAgainSpec where
 
 import Test.Hspec
 import Data.List (sort)
+import Data.Set (Set(), fromList, empty, size)
 import Q21to28ListsAgain
 
 -- `main` is here so that this module can be run from GHCi on its own.  It is
@@ -43,17 +44,17 @@ spec = do
           (originalList /= xs)
         )
 
---   describe "Problem 26" $ do
---     it "generates the combinations of K distinct objects chosen from the N elements of a list" $ do
---
--- In how many ways can a committee of 3 be chosen from a group of 12 people? We all know that there are C(12,3) = 220 possibilities (C(N,K) denotes the well-known binomial coefficients). For pure mathematicians, this result may be great. But we want to really generate all the possibilities in a list.
---
--- Example:
---
--- * (combinations 3 '(a b c d e f))
--- ((A B C) (A B D) (A B E) ... )
---
--- Example in Haskell:
---
--- λ> combinations 3 "abcdef"
--- ["abc","abd","abe",...]
+  describe "Problem 26" $ do
+    it "generates the combinations of K distinct objects chosen from the N elements of a list" $ do
+      let set :: (Ord a) => [[a]] -> Set (Set a)
+          set xs =  fromList $ fmap fromList xs
+      combinations 0 "abc" `shouldBe` empty
+      combinations 1 "abc" `shouldBe` set ["a", "b", "c"]
+      combinations 2 "abc" `shouldBe` set ["cb", "ab", "ca"]
+      combinations 3 "abc" `shouldBe` set ["cb", "ab", "ca"]
+      combinations 3 "abc" `shouldBe` set [
+          "cba", "dba", "eba",
+          "dca", "eca", "eda",
+          "dcb", "ecb", "edb",
+          "edc"]
+      size (combinations 3 "abcdefghijkl") `shouldBe` 220
