@@ -19,3 +19,8 @@ diffSelect noToSelect maxNo = undefined
 -- 25
 rndPermu :: [a] -> [a]
 rndPermu = undefined
+
+
+--- 26.
+combinations :: Int -> [b] -> Set (Set b)
+combinations n xs = undefined
